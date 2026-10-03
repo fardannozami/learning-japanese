@@ -167,6 +167,7 @@ export default function App() {
               {isQuizTab && (
                 <div>
                   <Quiz
+                    key={`${level.id}-p${paketNum}`}
                     levelId={level.id}
                     questions={level.quiz}
                     answers={answers[level.id] || {}}

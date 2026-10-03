@@ -73,6 +73,7 @@ Walau v1 ringan, tiap paket wajib mencakup 4 skill JLPT:
 - Langsung reveal: opsi benar hijau + icon check, opsi salah merah, lainnya redup.
 - Tampilkan kotak penjelasan (`Benar! / Penjelasan: ...`).
 - Bisa ganti jawaban (klik opsi lain menimpa).
+- Tombol Acak per paket: mengocok urutan soal + opsi (A/B/C/D) dengan RNG seed; jawaban tersimpan by indeks asli sehingga skor tetap benar; pindah paket me-reset acakan.
 - Skor bab = jumlah `selected === correct`.
 - Progress bab = `dijawab / total soal bab`.
 - Jika slice paket kosong (tidak boleh terjadi di data final), tampil pesan ramah, bukan layar blank.

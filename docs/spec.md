@@ -33,7 +33,7 @@ src/components/*.jsx → presentasional, terima props, tanpa state global
 | Summary | `items` | List checklist ringkasan |
 | Memory | `blocks` | Render `cards` grid / `table` scroll-x |
 | Vocab | `items` | Grid kartu dark `jp/kana/id/note` |
-| Quiz | `levelId, questions, answers, onAnswer, paket` (+ `PAKET_SIZE = 12`) | Slice 12 soal per paket, opsi A-D, reveal, penjelasan; fallback ramah jika slice kosong |
+| Quiz | `levelId, questions, answers, onAnswer, paket` (+ `PAKET_SIZE = 12`) | Slice 12 soal per paket, opsi A-D, reveal, penjelasan, toggle Acak (mulberry32); fallback ramah jika slice kosong |
 | Tips | `levelId, items` | List tips |
 | Sidebar | `levels, pctById, scoreById, totals, onSelect, onRecap` | Peta + rekap mini + catatan |
 | Recap | `levels, scoreById, pctById, totals, onRetry, onRestart, onContinue` | View rekap total + rincian |

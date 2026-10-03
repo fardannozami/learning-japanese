@@ -1,7 +1,28 @@
-import { Check, GraduationCap, X } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Check, GraduationCap, Shuffle, X } from "lucide-react";
 
 const SKILL_LABEL = { goi: "Goi", bunpou: "Bunpou", dokkai: "Dokkai", choukai: "Choukai" };
 export const PAKET_SIZE = 12;
+
+function mulberry32(a) {
+  return function () {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function shuffledIndexes(n, seed) {
+  const arr = Array.from({ length: n }, (_, i) => i);
+  const rnd = mulberry32(seed);
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(rnd() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
 export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
   const start = (paket - 1) * PAKET_SIZE;
@@ -11,6 +32,21 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
   const correctCount = filtered.filter(
     ({ q, origIndex }) => answers[origIndex] && answers[origIndex].selected === q.correct
   ).length;
+  const [shuffleSeed, setShuffleSeed] = useState(0); // 0 = urutan asli
+  const display = useMemo(() => {
+    const base = filtered.map(({ q, origIndex }) => ({ q, origIndex }));
+    const qOrder = shuffleSeed
+      ? shuffledIndexes(base.length, shuffleSeed)
+      : base.map((_, i) => i);
+    return qOrder.map((fi) => {
+      const item = base[fi];
+      const optOrder = shuffleSeed
+        ? shuffledIndexes(item.q.options.length, shuffleSeed * 1000 + item.origIndex + 7)
+        : item.q.options.map((_, i) => i);
+      return { ...item, optOrder };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtered.length, shuffleSeed, questions]);
 
   if (filtered.length === 0) {
     return (
@@ -25,19 +61,33 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
 
   return (
     <section className="rounded-[16px] bg-white border border-[#2E7D32]/10 shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-5 md:p-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <h3 className="pop flex items-center gap-2 text-[15px] font-bold">
           <span className="w-7 h-7 rounded-full bg-[#E8F5E9] grid place-items-center text-[#2E7D32]">
             <GraduationCap size={16} />
           </span>
           Paket {paket} • {filtered.length} Soal
         </h3>
-        <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#FFF8E1] text-[#8D6E00] border border-[#FFECB3]">
-          {correctCount}/{filtered.length} benar
-        </span>
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={() =>
+              setShuffleSeed((s) => (s === 0 ? Math.floor(Math.random() * 1e9) + 1 : 0))
+            }
+            className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] font-bold border transition-all active:scale-[0.98] ${
+              shuffleSeed
+                ? "bg-[#2E7D32] text-white border-[#2E7D32]"
+                : "bg-white text-[#2E7D32] border-[#2E7D32]/20 hover:bg-[#E8F5E9]"
+            }`}
+          >
+            <Shuffle size={12} /> {shuffleSeed ? "Acak: ON" : "Acak"}
+          </button>
+          <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#FFF8E1] text-[#8D6E00] border border-[#FFECB3]">
+            {correctCount}/{filtered.length} benar
+          </span>
+        </div>
       </div>
       <div className="mt-5 space-y-5">
-        {filtered.map(({ q, origIndex }, qi) => {
+        {display.map(({ q, origIndex, optOrder }, qi) => {
           const ans = answers[origIndex];
           const revealed = !!ans?.revealed;
           return (
@@ -64,7 +114,8 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
                     <p className="text-[12px] mt-1 text-[#2E7D32]/60 italic">{q.qJp}</p>
                   )}
                   <div className="mt-3 grid gap-2">
-                    {q.options.map((opt, oi) => {
+                    {optOrder.map((oi, di) => {
+                      const opt = q.options[oi];
                       const isSelected = ans?.selected === oi;
                       const isCorrect = q.correct === oi;
                       let cls =
@@ -79,7 +130,7 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
                       }
                       return (
                         <button
-                          key={oi}
+                          key={di}
                           onClick={() => onAnswer(levelId, origIndex, oi)}
                           className={`text-left w-full px-3.5 py-2.5 rounded-[10px] border text-[13px] leading-[1.45] flex items-start gap-2.5 transition-all active:scale-[0.99] ${cls}`}
                         >
@@ -98,10 +149,10 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
                               ) : isSelected ? (
                                 <X size={12} />
                               ) : (
-                                String.fromCharCode(65 + oi)
+                                String.fromCharCode(65 + di)
                               )
                             ) : (
-                              String.fromCharCode(65 + oi)
+                              String.fromCharCode(65 + di)
                             )}
                           </span>
                           <span className="flex-1">{opt}</span>
