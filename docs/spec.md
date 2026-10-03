@@ -26,7 +26,8 @@ src/components/*.jsx → presentasional, terima props, tanpa state global
 | Komponen | Props | Tugas |
 |---|---|---|
 | Header | `answered, total, pct, correct, onRecap, showHome, onHome` | Bar sticky atas + progress + tombol Home |
-| Home | `levels, pctById, scoreById, totals, onSelect, onRecap` | Halaman pertama pilih level |
+| Home | `levels, pctById, scoreById, totals, onSelect, onRecap, onSSW` | Halaman pertama pilih level + card SSW |
+| Ssw | — | Layar 2 modul asli (link tab baru ke `public/ssw/`) |
 | LevelSubTabs | `active, counts, onChange` | Sub-tab Materi/Paket 1-3/Rekap di dalam level |
 | LevelHero | `level, pct, score` | Badge, judul, skor, progress bar |
 | Summary | `items` | List checklist ringkasan |

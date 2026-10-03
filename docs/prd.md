@@ -44,10 +44,11 @@ Dari file `modul_x5f_interaktif_x5f_ssw_x5f_pertanian.html`:
 ## 6. Kebutuhan Fungsional
 
 ### F1. Navigasi Level
-- Layar `home`: pilih N5 / N4 / N3 / N2, atau buka Rekap.
+- Layar `home`: pilih N5 / N4 / N3 / N2, buka Rekap, atau buka card SSW Pertanian.
+- Layar `ssw`: dua modul asli (dibuka di tab baru): Modul Interaktif SSW + Bank Soal 200+ V2.
 - Layar `level`: sub-tab Materi | Paket 1 | Paket 2 | Paket 3 | Rekap (rekap per level: skor tiap paket + total); tombol Home kembali ke pilih level.
 - Layar `recap`: rekap total + tombol Ulangi per level.
-- Data `screen: 'home' | 'level' | 'recap'`, `activeId`, `subTab`.
+- Data `screen: 'home' | 'level' | 'recap' | 'ssw'`, `activeId`, `subTab`.
 
 ### F2. Tampilan Materi per Level
 Setiap level menampilkan:
@@ -107,6 +108,10 @@ Walau v1 ringan, tiap paket wajib mencakup 4 skill JLPT:
 ├── docs/
 │   ├── prd.md
 │   └── spec.md
+├── public/
+│   └── ssw/                # file modul asli (disajikan apa adanya)
+│       ├── modul-interaktif-ssw-pertanian.html
+│       └── bank-soal-200-v2.html
 ├── modul_x5f_interaktif_x5f_ssw_x5f_pertanian.html  # referensi, jangan diubah
 ├── index.html
 ├── package.json            # scripts bun: dev, build, preview

@@ -4,6 +4,7 @@ import { levels } from "./data";
 import { scoreOf, statusOf, totals } from "./lib/progress";
 import Header from "./components/Header";
 import { Home } from "./components/Home";
+import { Ssw } from "./components/Ssw";
 import { LevelSubTabs } from "./components/LevelSubTabs";
 import LevelHero from "./components/LevelHero";
 import { Summary } from "./components/Summary";
@@ -16,7 +17,7 @@ import { Recap, LevelRecap } from "./components/Recap";
 import { Toast } from "./components/Toast";
 
 export default function App() {
-  const [screen, setScreen] = useState("home"); // home | level | recap
+  const [screen, setScreen] = useState("home"); // home | level | recap | ssw
   const [activeId, setActiveId] = useState("N5");
   const [subTab, setSubTab] = useState("materi"); // materi | p1 | p2 | p3
   const [answers, setAnswers] = useState({});
@@ -69,6 +70,12 @@ export default function App() {
   const openRecap = () => {
     setScreen("recap");
     showToast("Buka Rekap Skor");
+    scrollTop();
+  };
+
+  const openSsw = () => {
+    setScreen("ssw");
+    showToast("SSW Pertanian");
     scrollTop();
   };
 
@@ -140,8 +147,10 @@ export default function App() {
             totals={total}
             onSelect={selectLevel}
             onRecap={openRecap}
+            onSSW={openSsw}
           />
         )}
+        {screen === "ssw" && <Ssw />}
         {screen === "level" && (
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_280px] gap-6 w-full">
             <div className="space-y-6 min-w-0 w-full">
