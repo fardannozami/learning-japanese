@@ -77,7 +77,7 @@ export function Ssw({ onHome }) {
     <div className="max-w-[720px] mx-auto space-y-6">
       <button
         onClick={onHome}
-        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white border border-[#3949AB]/20 text-[#3949AB] text-[12px] font-bold hover:bg-[#E8EAF6] active:scale-[0.98]"
+        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white border border-[#2E7D32]/20 text-[#2E7D32] text-[12px] font-bold hover:bg-[#E8F5E9] active:scale-[0.98]"
       >
         <ArrowLeft size={14} /> Beranda
       </button>

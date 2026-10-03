@@ -6,7 +6,7 @@ export function Memory({ blocks }) {
       {blocks.map((block, bi) => (
         <section
           key={bi}
-          className="rounded-[16px] bg-white border border-[#3949AB]/10 shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-5 md:p-6 max-w-full overflow-hidden"
+          className="rounded-[16px] bg-white border border-[#2E7D32]/10 shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-5 md:p-6 max-w-full overflow-hidden"
         >
           <h3 className="pop flex items-center gap-2 text-[15px] font-bold">
             <span className="w-7 h-7 rounded-full bg-[#FFF3E0] grid place-items-center text-[#FF6F00]">
@@ -19,12 +19,12 @@ export function Memory({ blocks }) {
               {block.data.map((card, ci) => (
                 <div
                   key={ci}
-                  className="rounded-[14px] border border-[#3949AB]/10 bg-[#FAFAFF] p-4 flex gap-3 hover:shadow-md transition-shadow"
+                  className="rounded-[14px] border border-[#2E7D32]/10 bg-[#FAFFF9] p-4 flex gap-3 hover:shadow-md transition-shadow"
                 >
                   <div className="text-[22px] leading-none">{card.icon}</div>
                   <div>
                     <div className="text-[13px] font-bold">{card.name}</div>
-                    <div className="text-[12px] text-[#3949AB]/70 leading-[1.4] mt-0.5">
+                    <div className="text-[12px] text-[#2E7D32]/70 leading-[1.4] mt-0.5">
                       {card.desc}
                     </div>
                   </div>
@@ -33,11 +33,11 @@ export function Memory({ blocks }) {
             </div>
           )}
           {block.type === "table" && (
-            <div className="mt-4 overflow-hidden rounded-[12px] border border-[#3949AB]/10 max-w-full">
+            <div className="mt-4 overflow-hidden rounded-[12px] border border-[#2E7D32]/10 max-w-full">
               <div className="overflow-x-auto max-w-full">
                 <table className="w-full min-w-[420px] text-[12px] md:text-[13px]">
                   <thead>
-                    <tr className="bg-[#3949AB] text-white">
+                    <tr className="bg-[#2E7D32] text-white">
                       {block.data.headers.map((h, hi) => (
                         <th
                           key={hi}
@@ -50,11 +50,11 @@ export function Memory({ blocks }) {
                   </thead>
                   <tbody>
                     {block.data.rows.map((row, ri) => (
-                      <tr key={ri} className={ri % 2 === 0 ? "bg-white" : "bg-[#F5F6FD]"}>
+                      <tr key={ri} className={ri % 2 === 0 ? "bg-white" : "bg-[#F6FBF6]"}>
                         {row.map((cell, ci) => (
                           <td
                             key={ci}
-                            className="px-3 py-2.5 border-t border-[#3949AB]/10 align-top leading-[1.4]"
+                            className="px-3 py-2.5 border-t border-[#2E7D32]/10 align-top leading-[1.4]"
                           >
                             {cell}
                           </td>

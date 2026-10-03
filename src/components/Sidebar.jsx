@@ -3,8 +3,8 @@ import { Award, TriangleAlert } from "lucide-react";
 export function Sidebar({ levels, pctById, scoreById, totals, onSelect, onRecap }) {
   return (
     <div className="sticky top-[120px] space-y-4">
-      <div className="rounded-[16px] bg-white border border-[#3949AB]/10 shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-4">
-        <h4 className="text-[12px] font-bold uppercase tracking-widest text-[#3949AB]/60">
+      <div className="rounded-[16px] bg-white border border-[#2E7D32]/10 shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-4">
+        <h4 className="text-[12px] font-bold uppercase tracking-widest text-[#2E7D32]/60">
           Peta Belajar
         </h4>
         <div className="mt-3 space-y-2">
@@ -16,22 +16,22 @@ export function Sidebar({ levels, pctById, scoreById, totals, onSelect, onRecap 
               <button
                 key={lv.id}
                 onClick={() => onSelect(lv.id)}
-                className="w-full text-left rounded-[12px] border px-3 py-2.5 flex items-center justify-between gap-2 transition-all bg-[#FCFCFF] border-[#3949AB]/10 hover:bg-white"
+                className="w-full text-left rounded-[12px] border px-3 py-2.5 flex items-center justify-between gap-2 transition-all bg-[#FCFFFC] border-[#2E7D32]/10 hover:bg-white"
               >
                 <div className="flex items-center gap-2">
-                  <span className="w-7 h-7 rounded-full grid place-items-center bg-[#EEF0FA] text-[#3949AB]">
+                  <span className="w-7 h-7 rounded-full grid place-items-center bg-[#F1F8E9] text-[#2E7D32]">
                     <Icon size={14} />
                   </span>
                   <div>
                     <div className="text-[12px] font-bold leading-tight">{lv.short}</div>
-                    <div className="text-[10px] text-[#3949AB]/60">
+                    <div className="text-[10px] text-[#2E7D32]/60">
                       {sc.correct}/{sc.total} • {pct}%
                     </div>
                   </div>
                 </div>
-                <div className="w-10 h-1.5 rounded-full bg-[#3949AB]/10 overflow-hidden">
+                <div className="w-10 h-1.5 rounded-full bg-[#2E7D32]/10 overflow-hidden">
                   <div
-                    className="h-full bg-[#3949AB] transition-all"
+                    className="h-full bg-[#2E7D32] transition-all"
                     style={{ width: `${pct}%` }}
                   />
                 </div>
@@ -40,7 +40,7 @@ export function Sidebar({ levels, pctById, scoreById, totals, onSelect, onRecap 
           })}
         </div>
       </div>
-      <div className="rounded-[16px] bg-[#3949AB] text-white p-4 shadow-[0_8px_24px_rgba(57,73,171,0.25)]">
+      <div className="rounded-[16px] bg-[#2E7D32] text-white p-4 shadow-[0_8px_24px_rgba(46,125,50,0.25)]">
         <div className="flex items-center gap-2 font-bold text-[13px]">
           <Award size={16} className="text-[#FFECB3]" /> Rekap Skor
         </div>
@@ -48,7 +48,7 @@ export function Sidebar({ levels, pctById, scoreById, totals, onSelect, onRecap 
           {totals.correct}
           <span className="text-[16px] font-semibold text-white/70">/{totals.total}</span>
         </div>
-        <div className="mt-1 text-[12px] text-[#C5CAE9]">
+        <div className="mt-1 text-[12px] text-[#C8E6C9]">
           {totals.progressPct}% progress • {totals.answered} dijawab
         </div>
         <div className="mt-3 h-2 rounded-full bg-white/15 overflow-hidden">
@@ -59,7 +59,7 @@ export function Sidebar({ levels, pctById, scoreById, totals, onSelect, onRecap 
         </div>
         <button
           onClick={onRecap}
-          className="mt-4 w-full py-2 rounded-full bg-white text-[#3949AB] text-[12px] font-bold hover:bg-[#FFF8E1] transition-colors"
+          className="mt-4 w-full py-2 rounded-full bg-white text-[#2E7D32] text-[12px] font-bold hover:bg-[#FFF8E1] transition-colors"
         >
           Lihat Detail Rekap
         </button>

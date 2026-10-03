@@ -128,7 +128,7 @@ export default function App() {
     subTab === "materi" ? "Mulai" : atEnd ? (isLast ? "Rekap" : "Lanjut") : "Paket";
 
   return (
-    <div className="min-h-screen bg-[#F7F3EC] text-[#1B2340] overflow-x-hidden">
+    <div className="min-h-screen bg-[#FFF8E1] text-[#1B2A1B] selection:bg-[#2E7D32]/20 overflow-x-hidden">
       <Header
         answered={total.answered}
         total={total.total}
@@ -194,16 +194,16 @@ export default function App() {
                 />
               )}
               <div className="flex items-center justify-between gap-3">
-                <div className="text-[12px] text-[#3949AB]/60">
+                <div className="text-[12px] text-[#2E7D32]/60">
                   Skor level ini:{" "}
-                  <b className="text-[#3949AB]">
+                  <b className="text-[#2E7D32]">
                     {levelScore.correct}/{levelScore.total}
                   </b>{" "}
                   • Total: {total.correct}/{total.total}
                 </div>
                 <button
                   onClick={bottomAction}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#3949AB] text-white text-[13px] font-bold shadow-lg shadow-[#3949AB]/20 hover:bg-[#283593] active:scale-[0.98] transition-all"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#2E7D32] text-white text-[13px] font-bold shadow-lg shadow-[#2E7D32]/20 hover:bg-[#1B5E20] active:scale-[0.98] transition-all"
                 >
                   {bottomLabel} <ArrowRight size={16} />
                 </button>
@@ -235,18 +235,18 @@ export default function App() {
       </main>
       <Toast message={toast} />
       {screen === "level" && (
-        <div className="lg:hidden sticky bottom-0 z-20 bg-[#F7F3EC]/95 backdrop-blur-xl border-t border-[#3949AB]/10 px-4 py-3 flex items-center justify-between gap-3 max-w-full overflow-hidden">
+        <div className="lg:hidden sticky bottom-0 z-20 bg-[#FFF8E1]/95 backdrop-blur-xl border-t border-[#2E7D32]/10 px-4 py-3 flex items-center justify-between gap-3 max-w-full overflow-hidden">
           <div className="text-[12px]">
             <div className="font-bold">
               {level.id}: {level.label.split(" ")[0]}
             </div>
-            <div className="text-[#3949AB]/60 text-[11px]">
+            <div className="text-[#2E7D32]/60 text-[11px]">
               {levelScore.correct}/{levelScore.total} benar • {levelPct}%
             </div>
           </div>
           <button
             onClick={bottomAction}
-            className="px-4 py-2.5 rounded-full bg-[#3949AB] text-white text-[12px] font-bold shadow flex items-center gap-1.5 active:scale-[0.98]"
+            className="px-4 py-2.5 rounded-full bg-[#2E7D32] text-white text-[12px] font-bold shadow flex items-center gap-1.5 active:scale-[0.98]"
           >
             {mobileLabel} <ArrowRight size={14} />
           </button>

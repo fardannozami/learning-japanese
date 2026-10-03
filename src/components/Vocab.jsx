@@ -2,7 +2,7 @@ import { Languages } from "lucide-react";
 
 export function Vocab({ items }) {
   return (
-    <section className="rounded-[16px] bg-[#3949AB] text-white p-5 md:p-6 shadow-[0_8px_24px_rgba(57,73,171,0.25)] relative overflow-hidden">
+    <section className="rounded-[16px] bg-[#2E7D32] text-white p-5 md:p-6 shadow-[0_8px_24px_rgba(46,125,50,0.25)] relative overflow-hidden">
       <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-white/10 blur-2xl" />
       <h3 className="pop flex items-center gap-2 text-[15px] font-bold">
         <span className="w-7 h-7 rounded-full bg-white/15 grid place-items-center">
@@ -22,7 +22,7 @@ export function Vocab({ items }) {
                 {v.kana}
               </span>
             </div>
-            <div className="text-[12px] mt-1 text-[#E8EAF6]">{v.id}</div>
+            <div className="text-[12px] mt-1 text-[#E8F5E9]">{v.id}</div>
             {v.note && (
               <div className="text-[10px] mt-1 text-[#FFECB3] font-semibold">★ {v.note}</div>
             )}

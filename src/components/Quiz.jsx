@@ -14,9 +14,9 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
 
   if (filtered.length === 0) {
     return (
-      <section className="rounded-[16px] bg-white border border-[#3949AB]/10 p-5 md:p-6 text-center">
+      <section className="rounded-[16px] bg-white border border-[#2E7D32]/10 p-5 md:p-6 text-center">
         <p className="text-[14px] font-bold">Soal paket ini belum tersedia.</p>
-        <p className="text-[12px] mt-1 text-[#3949AB]/60">
+        <p className="text-[12px] mt-1 text-[#2E7D32]/60">
           Coba hard-refresh browser (Ctrl+Shift+R) atau restart dev server.
         </p>
       </section>
@@ -24,10 +24,10 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
   }
 
   return (
-    <section className="rounded-[16px] bg-white border border-[#3949AB]/10 shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-5 md:p-6">
+    <section className="rounded-[16px] bg-white border border-[#2E7D32]/10 shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-5 md:p-6">
       <div className="flex items-center justify-between">
         <h3 className="pop flex items-center gap-2 text-[15px] font-bold">
-          <span className="w-7 h-7 rounded-full bg-[#E8EAF6] grid place-items-center text-[#3949AB]">
+          <span className="w-7 h-7 rounded-full bg-[#E8F5E9] grid place-items-center text-[#2E7D32]">
             <GraduationCap size={16} />
           </span>
           Paket {paket} • {filtered.length} Soal
@@ -43,10 +43,10 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
           return (
             <div
               key={origIndex}
-              className="rounded-[14px] border border-[#3949AB]/10 bg-[#FCFCFF] p-4 md:p-5"
+              className="rounded-[14px] border border-[#2E7D32]/10 bg-[#FCFFFC] p-4 md:p-5"
             >
               <div className="flex gap-3">
-                <div className="shrink-0 w-7 h-7 rounded-full bg-[#3949AB] text-white grid place-items-center text-[12px] font-bold">
+                <div className="shrink-0 w-7 h-7 rounded-full bg-[#2E7D32] text-white grid place-items-center text-[12px] font-bold">
                   {qi + 1}
                 </div>
                 <div className="flex-1">
@@ -55,27 +55,27 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
                       {q.q}
                     </p>
                     {q.skill && (
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#E8EAF6] text-[#3949AB] uppercase tracking-wide">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#E8F5E9] text-[#2E7D32] uppercase tracking-wide">
                         {SKILL_LABEL[q.skill] || q.skill}
                       </span>
                     )}
                   </div>
                   {q.qJp && (
-                    <p className="text-[12px] mt-1 text-[#3949AB]/60 italic">{q.qJp}</p>
+                    <p className="text-[12px] mt-1 text-[#2E7D32]/60 italic">{q.qJp}</p>
                   )}
                   <div className="mt-3 grid gap-2">
                     {q.options.map((opt, oi) => {
                       const isSelected = ans?.selected === oi;
                       const isCorrect = q.correct === oi;
                       let cls =
-                        "border-[#3949AB]/15 bg-white hover:border-[#3949AB]/30 hover:bg-[#F5F6FD]";
+                        "border-[#2E7D32]/15 bg-white hover:border-[#2E7D32]/30 hover:bg-[#F6FBF6]";
                       if (revealed) {
-                        if (isCorrect) cls = "border-[#3949AB] bg-[#E8EAF6] text-[#1A237E]";
+                        if (isCorrect) cls = "border-[#2E7D32] bg-[#E8F5E9] text-[#1B5E20]";
                         else if (isSelected && !isCorrect)
                           cls = "border-[#C62828] bg-[#FFEBEE] text-[#B71C1C]";
-                        else cls = "border-[#3949AB]/10 bg-white opacity-70";
+                        else cls = "border-[#2E7D32]/10 bg-white opacity-70";
                       } else if (isSelected) {
-                        cls = "border-[#3949AB] bg-[#E8EAF6]";
+                        cls = "border-[#2E7D32] bg-[#E8F5E9]";
                       }
                       return (
                         <button
@@ -86,10 +86,10 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
                           <span
                             className={`mt-0.5 shrink-0 w-5 h-5 rounded-full border grid place-items-center text-[11px] font-bold ${
                               revealed && isCorrect
-                                ? "bg-[#3949AB] border-[#3949AB] text-white"
+                                ? "bg-[#2E7D32] border-[#2E7D32] text-white"
                                 : revealed && isSelected && !isCorrect
                                   ? "bg-[#C62828] border-[#C62828] text-white"
-                                  : "bg-white border-[#3949AB]/20"
+                                  : "bg-white border-[#2E7D32]/20"
                             }`}
                           >
                             {revealed ? (
@@ -113,7 +113,7 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
                     <div
                       className={`mt-3 rounded-[10px] px-3.5 py-3 text-[12px] leading-[1.5] flex gap-2 ${
                         ans?.selected === q.correct
-                          ? "bg-[#E8EAF6] text-[#1A237E] border border-[#9FA8DA]"
+                          ? "bg-[#E8F5E9] text-[#1B5E20] border border-[#A5D6A7]"
                           : "bg-[#FFF3E0] text-[#6D4C00] border border-[#FFCC80]"
                       }`}
                     >

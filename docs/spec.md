@@ -77,7 +77,7 @@ const [toast, setToast] = useState(null);
 - `src/lib/progress.js` wajib fungsi murni agar bisa dicek manual tanpa render.
 
 ## 5. UI Mapping dari Referensi
-- Copy pola class Tailwind dari `modul_x5f_interaktif_x5f_ssw_x5f_pertanian.html` (rounded `[20px]/[16px]/[14px]`, border `[#2E7D32]/10`, dsb); ganti palet hijau → tema Jepang (indigo/sakura) saat scaffolding agar tidak identik.
+- Copy pola class Tailwind dari `modul_x5f_interaktif_x5f_ssw_x5f_pertanian.html` (rounded `[20px]/[16px]/[14px]`, border, dan palet hijau `#2E7D32` + krem `#FFF8E1` + aksen oranye — sama persis dengan modul SSW sesuai permintaan user).
 - Urutan render per level: `LevelHero → LevelSubTabs → (Materi: Summary/Memory/Vocab/Tips | Paket: Quiz | Rekap: LevelRecap) → footer skor + tombol bawah`.
 - Tabel: bungkus `overflow-x-auto`, inner `min-w-[420px]`; teks soal `min-w-0` agar aman di layar sempit.
 - Quiz states: default `border-.../15 bg-white`; benar `bg-[#E8EAF6]`; salah `bg-[#FFEBEE]`; belum reveal lainnya `opacity-70`. Badge skill per soal (Goi/Bunpou/Dokkai/Choukai).
