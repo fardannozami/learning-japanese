@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Check, GraduationCap, Shuffle, X } from "lucide-react";
+import { Check, GraduationCap, X } from "lucide-react";
 
 const SKILL_LABEL = { goi: "Goi", bunpou: "Bunpou", dokkai: "Dokkai", choukai: "Choukai" };
 export const PAKET_SIZE = 12;
@@ -32,21 +32,17 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
   const correctCount = filtered.filter(
     ({ q, origIndex }) => answers[origIndex] && answers[origIndex].selected === q.correct
   ).length;
-  const [shuffleSeed, setShuffleSeed] = useState(0); // 0 = urutan asli
+  const [seed] = useState(() => Math.floor(Math.random() * 1e9) + 1); // acak baru tiap mount
   const display = useMemo(() => {
     const base = filtered.map(({ q, origIndex }) => ({ q, origIndex }));
-    const qOrder = shuffleSeed
-      ? shuffledIndexes(base.length, shuffleSeed)
-      : base.map((_, i) => i);
+    const qOrder = shuffledIndexes(base.length, seed);
     return qOrder.map((fi) => {
       const item = base[fi];
-      const optOrder = shuffleSeed
-        ? shuffledIndexes(item.q.options.length, shuffleSeed * 1000 + item.origIndex + 7)
-        : item.q.options.map((_, i) => i);
+      const optOrder = shuffledIndexes(item.q.options.length, seed * 1000 + item.origIndex + 7);
       return { ...item, optOrder };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filtered.length, shuffleSeed, questions]);
+  }, [filtered.length, seed, questions]);
 
   if (filtered.length === 0) {
     return (
@@ -61,30 +57,16 @@ export function Quiz({ levelId, questions, answers, onAnswer, paket }) {
 
   return (
     <section className="rounded-[16px] bg-white border border-[#2E7D32]/10 shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-5 md:p-6">
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex items-center justify-between">
         <h3 className="pop flex items-center gap-2 text-[15px] font-bold">
           <span className="w-7 h-7 rounded-full bg-[#E8F5E9] grid place-items-center text-[#2E7D32]">
             <GraduationCap size={16} />
           </span>
           Paket {paket} • {filtered.length} Soal
         </h3>
-        <div className="flex items-center gap-2 shrink-0">
-          <button
-            onClick={() =>
-              setShuffleSeed((s) => (s === 0 ? Math.floor(Math.random() * 1e9) + 1 : 0))
-            }
-            className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] font-bold border transition-all active:scale-[0.98] ${
-              shuffleSeed
-                ? "bg-[#2E7D32] text-white border-[#2E7D32]"
-                : "bg-white text-[#2E7D32] border-[#2E7D32]/20 hover:bg-[#E8F5E9]"
-            }`}
-          >
-            <Shuffle size={12} /> {shuffleSeed ? "Acak: ON" : "Acak"}
-          </button>
-          <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#FFF8E1] text-[#8D6E00] border border-[#FFECB3]">
-            {correctCount}/{filtered.length} benar
-          </span>
-        </div>
+        <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#FFF8E1] text-[#8D6E00] border border-[#FFECB3]">
+          {correctCount}/{filtered.length} benar
+        </span>
       </div>
       <div className="mt-5 space-y-5">
         {display.map(({ q, origIndex, optOrder }, qi) => {
