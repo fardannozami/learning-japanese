@@ -59,7 +59,7 @@ Aturan: komponen tidak boleh membaca/menulis state global langsung; semua lewat 
 // answers: Record<levelId, Record<qIndex, { selected: number, revealed: true }>>
 ```
 
-Validasi saat dev: tiap quiz `options.length===4`, `0<=correct<4`; tiap paket 12 soal komposisi 4-4-2-2 (`prd.md §6 F3`); tiap level 36 soal = 3 paket.
+Validasi saat dev: tiap quiz `options.length===4`, `0<=correct<4`; tiap paket 12 soal komposisi 4-4-2-2 (`prd.md §6 F3`); jumlah paket dinamis mengikuti panjang data (N4 = 10).
 
 ## 4. State & Logic (`App.jsx` + `src/lib/progress.js`)
 ```js

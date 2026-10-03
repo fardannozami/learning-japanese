@@ -66,7 +66,7 @@ Walau v1 ringan, tiap paket wajib mencakup 4 skill JLPT:
 - Bunpou: 1 tabel pola + 4 soal quiz per paket.
 - Dokkai: 2 soal quiz berbasis paragraf pendek (taro di `q`).
 - Choukai: 2 soal quiz berbasis naskah (`qJp` dipakai sebagai transkrip/dialog).
-- Distribusi soal: tiap level 3 paket × 12 soal campuran (per paket: 4 Goi, 4 Bunpou, 2 Dokkai, 2 Choukai). Tiap level 36 soal, total 144 soal. Urutan di file = Paket 1 (indeks 0–11), Paket 2 (12–23), Paket 3 (24–35).
+- Distribusi soal: N5/N3/N2 masing-masing 3 paket, N4 10 paket; tiap paket 12 soal campuran (per paket: 4 Goi, 4 Bunpou, 2 Dokkai, 2 Choukai). N5/N3/N2 = 36 soal/level, N4 = 120 soal, total 228 soal. Urutan di file = Paket 1 (indeks 0–11), Paket 2 (12–23), dst. Jumlah tab paket mengikuti data (dinamis).
 
 ### F4. Quiz Interaktif
 - Klik opsi → simpan `{ selected, revealed: true }` per `levelId/questionIndex`.
@@ -79,7 +79,7 @@ Walau v1 ringan, tiap paket wajib mencakup 4 skill JLPT:
 - Jika slice paket kosong (tidak boleh terjadi di data final), tampil pesan ramah, bukan layar blank.
 
 ### F5. Progress & Rekap
-- Global: `totalDijawab`, `totalBenar`, `totalSoal` (dihitung dinamis dari data; saat ini 144), `progress %`, `akurasi %`.
+- Global: `totalDijawab`, `totalBenar`, `totalSoal` (dihitung dinamis dari data; saat ini 228), `progress %`, `akurasi %`.
 - Status: `progress===100 ? (akurasi>=70 ? 'Siap Ujian! 🔥' : 'Ulangi Bab Lemah') : 'Lanjut Belajar'`, target 70%.
 - Rincian per level: `benar/total`, `% dikerjakan`, `% akurasi`, tombol Ulangi.
 - Sidebar + header selalu sinkron dengan state jawaban.
@@ -166,8 +166,8 @@ export const n5 = {
 ```
 
 ## 11. Konten v1 (ringan, sudah disepakati)
-- Per level: 20 vocab + 36 quiz (3 paket × 12 soal campuran 4-4-2-2).
-- Total: ~80 vocab, 144 soal.
+- Per level: 20 vocab + quiz (N5/N3/N2: 3 paket × 12; N4: 10 paket × 12).
+- Total: ~80 vocab, 228 soal.
 - Draft konten dibuat oleh dev sebagai placeholder akurat (pola dasar per level), user boleh revisi:
   - N5: hiragana/katakana, `~masu/~nai/~ta`, partikel `は・が・を・に・へ・で`, angka/waktu, kosakata sehari-hari.
   - N4: `~te form`, `~nai → ~nakereba`, `potensial`, `~tari~tari`, keigo dasar.
@@ -178,7 +178,7 @@ export const n5 = {
 - [ ] `bun install && bun run dev` jalan tanpa error.
 - [ ] Home + sub-tab (Materi/Paket 1-3/Rekap) tampil dan bisa diklik (mobile & desktop).
 - [ ] Tiap level menampilkan section materi (F2) + quiz per paket + rekap level tanpa layout rusak.
-- [ ] Quiz 144 soal bisa dijawab, reveal + penjelasan muncul, skor terhitung benar.
+- [ ] Quiz 228 soal bisa dijawab, reveal + penjelasan muncul, skor terhitung benar.
 - [ ] Header/sidebar/rekap menampilkan angka konsisten (dijawab, benar, %).
 - [ ] Tabel scroll-x di HP, tidak ada overflow horizontal halaman.
 - [ ] `bun run build` sukses, `dist/` bisa di-preview.

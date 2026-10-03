@@ -3,7 +3,8 @@ import { PAKET_SIZE } from "./Quiz";
 
 export function LevelRecap({ level, answers, onRetryPaket, onRestart, onGlobalRecap, onNext, isLast }) {
   const Icon = level.icon;
-  const per = [0, 1, 2].map((p) => {
+  const paketCount = Math.max(1, Math.ceil(level.quiz.length / PAKET_SIZE));
+  const per = Array.from({ length: paketCount }, (_, p) => {
     const slice = level.quiz.slice(p * PAKET_SIZE, p * PAKET_SIZE + PAKET_SIZE);
     let correct = 0;
     let answered = 0;
@@ -45,7 +46,7 @@ export function LevelRecap({ level, answers, onRetryPaket, onRestart, onGlobalRe
             Rekap Level {level.id}
           </h2>
           <p className="mt-1 text-[13px] text-[#2E7D32]/70">
-            {level.label} • 3 Paket • {totalSoal} soal
+            {level.label} • {paketCount} Paket • {totalSoal} soal
           </p>
           <div className="mt-6 grid grid-cols-3 gap-3 text-left">
             <div className="rounded-[14px] bg-[#F1F8E9] border border-[#2E7D32]/10 p-4">

@@ -38,12 +38,17 @@ export default function App() {
     const lv = levels.find((l) => l.id === id);
     return lv ? scoreOf(lv, answers) : { correct: 0, total: 0, answered: 0, pctDone: 0, accuracy: 0 };
   };
-  const paketCounts = [0, 0, 0];
-  level.quiz.forEach((_, i) => {
-    paketCounts[Math.min(Math.floor(i / PAKET_SIZE), 2)] += 1;
-  });
-  const subCounts = { p1: paketCounts[0], p2: paketCounts[1], p3: paketCounts[2] };
-  const paketNum = { p1: 1, p2: 2, p3: 3 }[subTab] || 1;
+  const paketCount = Math.max(1, Math.ceil(level.quiz.length / PAKET_SIZE));
+  const paketIds = Array.from({ length: paketCount }, (_, i) => `p${i + 1}`);
+  const paketSizes = paketIds.map((_, i) =>
+    level.quiz.slice(i * PAKET_SIZE, i * PAKET_SIZE + PAKET_SIZE).length
+  );
+  const subTabs = [
+    { id: "materi", label: "Materi" },
+    ...paketIds.map((id, i) => ({ id, label: `Paket ${i + 1}`, count: paketSizes[i] })),
+    { id: "rekap", label: "Rekap" },
+  ];
+  const paketNum = subTab.startsWith("p") ? parseInt(subTab.slice(1), 10) || 1 : 1;
 
   const showToast = (msg) => {
     setToast(msg);
@@ -89,8 +94,8 @@ export default function App() {
   const levelScore = scoreOf(level, answers);
   const levelPct = levelScore.pctDone;
   const isLast = levels.findIndex((l) => l.id === activeId) === levels.length - 1;
-  const isQuizTab = subTab === "p1" || subTab === "p2" || subTab === "p3";
-  const atEnd = subTab === "p3" || subTab === "rekap";
+  const isQuizTab = subTab.startsWith("p");
+  const atEnd = subTab === `p${paketCount}` || subTab === "rekap";
 
   const nextLevel = () => {
     const idx = levels.findIndex((l) => l.id === activeId);
@@ -102,13 +107,13 @@ export default function App() {
   };
 
   const nextPaket = () => {
-    const order = ["materi", "p1", "p2", "p3"];
+    const order = ["materi", ...paketIds];
     const idx = order.indexOf(subTab);
     if (idx < order.length - 1) {
       const next = order[idx + 1];
       setSubTab(next);
-      const num = { p1: 1, p2: 2, p3: 3 }[next];
-      showToast(num ? `Paket ${num} • 12 soal` : "Materi");
+      const num = next.startsWith("p") ? parseInt(next.slice(1), 10) : 0;
+      showToast(num ? `Paket ${num} • ${paketSizes[num - 1]} soal` : "Materi");
       scrollTop();
     } else {
       nextLevel();
@@ -155,7 +160,7 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_280px] gap-6 w-full">
             <div className="space-y-6 min-w-0 w-full">
               <LevelHero level={level} pct={levelPct} score={levelScore} />
-              <LevelSubTabs active={subTab} counts={subCounts} onChange={setSubTab} />
+              <LevelSubTabs active={subTab} tabs={subTabs} onChange={setSubTab} />
               {subTab === "materi" && (
                 <>
                   <Summary items={level.summary} />

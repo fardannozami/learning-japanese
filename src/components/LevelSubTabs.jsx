@@ -1,19 +1,11 @@
-const TABS = [
-  { id: "materi", label: "Materi" },
-  { id: "p1", label: "Paket 1" },
-  { id: "p2", label: "Paket 2" },
-  { id: "p3", label: "Paket 3" },
-  { id: "rekap", label: "Rekap" },
-];
-
-export function LevelSubTabs({ active, counts, onChange }) {
+export function LevelSubTabs({ active, tabs, onChange }) {
   return (
     <nav className="sticky top-[57px] md:top-[65px] z-20 bg-[#FFF8E1]/90 backdrop-blur-xl border-b border-[#2E7D32]/10 -mx-4 px-4 md:-mx-6 md:px-6">
       <div className="py-2">
         <div className="flex gap-2 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
-          {TABS.map((t) => {
+          {tabs.map((t) => {
             const isActive = active === t.id;
-            const count = counts[t.id];
+            const count = t.count;
             return (
               <button
                 key={t.id}
