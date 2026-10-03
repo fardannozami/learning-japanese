@@ -150,7 +150,7 @@ export default function App() {
             onSSW={openSsw}
           />
         )}
-        {screen === "ssw" && <Ssw />}
+        {screen === "ssw" && <Ssw onHome={goHome} />}
         {screen === "level" && (
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_280px] gap-6 w-full">
             <div className="space-y-6 min-w-0 w-full">

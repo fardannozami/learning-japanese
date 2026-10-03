@@ -22,7 +22,7 @@ const MODULES = [
   },
 ];
 
-export function Ssw() {
+export function Ssw({ onHome }) {
   const [openId, setOpenId] = useState(null);
   const active = MODULES.find((m) => m.id === openId);
 
@@ -75,6 +75,12 @@ export function Ssw() {
 
   return (
     <div className="max-w-[720px] mx-auto space-y-6">
+      <button
+        onClick={onHome}
+        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white border border-[#3949AB]/20 text-[#3949AB] text-[12px] font-bold hover:bg-[#E8EAF6] active:scale-[0.98]"
+      >
+        <ArrowLeft size={14} /> Beranda
+      </button>
       <div className="text-center pt-2">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F5E9] text-[#2E7D32] text-[11px] font-bold tracking-widest uppercase">
           <Tractor size={12} /> Tokutei Ginou Pertanian
